@@ -1,6 +1,6 @@
 Package: BiocBuildFailureDiagnosis
-Title: Helps discovering possible dependencies that trigger
-    your error.
+Title: Helps Discovering Possible Dependencies that Trigger
+    an Error in your Package
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Charlotte",

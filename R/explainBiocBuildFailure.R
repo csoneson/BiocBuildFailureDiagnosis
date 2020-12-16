@@ -27,6 +27,7 @@
 #' @importFrom dplyr group_by summarize filter pull left_join mutate '%>%'
 #' @importFrom igraph induced_subgraph V set_vertex_attr
 #' @importFrom visNetwork toVisNetworkData visEdges
+#' @importFrom BiocManager version
 #' @export
 #' @examples
 #' explainBiocBuildFailure("Rhisat2")
@@ -41,8 +42,11 @@ explainBiocBuildFailure <- function(package,
     ## Get build report, possibly subset to specific platform(s) and
     ## summarize with a single pass/fail for each package
     biocVersion <- as.character(biocVersion)
-    br <- BiocPkgTools::biocBuildReport(version = biocVersion)
-    br <- br %>% dplyr::filter(node %in% buildNodes) %>%
+    # Prevent notes on checks
+    br <- pkg <- node <- result <- last_changed_date <- NULL
+    fail <- frac_fail <- Package <- Version <- dependsOnMe <- importsMe <- NULL
+    br <- BiocPkgTools::biocBuildReport(version = biocVersion) %>%
+        dplyr::filter(node %in% buildNodes) %>%
         dplyr::group_by(pkg) %>%
         dplyr::summarize(fail = ("ERROR" %in% result),
                          last_changed = max(last_changed_date),
