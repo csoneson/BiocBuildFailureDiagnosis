@@ -23,10 +23,11 @@
 #'   last changed, and the fraction of its direct descendants (packages that
 #'   depend on or import it) that currently fail. Note that only Bioc
 #'   dependencies are shown.
-#' @importFrom BiocPkgTools biocBuildreport biocPkgList buildPkgDependencyDataFrame buildPkgDependencyIgraph
+#' @importFrom BiocPkgTools biocBuildReport biocPkgList buildPkgDependencyDataFrame buildPkgDependencyIgraph
 #' @importFrom dplyr group_by summarize filter pull left_join mutate '%>%'
 #' @importFrom igraph induced_subgraph V set_vertex_attr
 #' @importFrom visNetwork toVisNetworkData visEdges
+#' @export
 #' @examples
 #' explainBiocBuildFailure("Rhisat2")
 explainBiocBuildFailure <- function(package,

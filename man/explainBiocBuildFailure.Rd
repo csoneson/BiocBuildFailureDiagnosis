@@ -6,7 +6,7 @@
 \usage{
 explainBiocBuildFailure(
   package,
-  biocVersion,
+  biocVersion = BiocManager::version(),
   buildNodes = c("malbec2", "tokay2", "riesling1", "machv2"),
   showOnlyFailing = FALSE,
   repo = "BioCsoft",
@@ -43,6 +43,9 @@ dependencies are shown.
 }
 \description{
 Attempt to explain why a certain Bioconductor package fails on the build machine(s)
+}
+\examples{
+explainBiocBuildFailure("Rhisat2")
 }
 \author{
 Charlotte Soneson
