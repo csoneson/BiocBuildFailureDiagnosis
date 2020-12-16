@@ -1,0 +1,35 @@
+Package: BiocBuildFailureDiagnosis
+Title: Helps discovering possible dependencies that trigger
+    your error.
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Charlotte",
+             family = "Soneson",
+             role = c("aut", "cre"),
+             email = "charlottesoneson@gmail.com",
+             comment = c(ORCID = "0000-0003-3833-2169")),
+      person(given = "Lluís",
+             family = "Revilla Sancho",
+             role = "ctb",
+             email = "lluis.revilla@gmail.com",
+             comment = c(ORCID = "0000-0001-9747-2570")))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+URL: https://github.com/csoneson/BiocBuildFailureDiagnosis
+BugReports: 
+    https://github.com/csoneson/BiocBuildFailureDiagnosis/issues
+Imports: 
+    BiocManager,
+    BiocPkgTools (>= 1.6.0),
+    dplyr (>= 1.0.2),
+    igraph (>= 1.2.6),
+    lubridate (>= 1.7.9.2),
+    purrr (>= 0.3.4),
+    visNetwork (>= 2.0.9)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
