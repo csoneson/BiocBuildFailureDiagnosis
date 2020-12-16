@@ -23,7 +23,12 @@
 #'   last changed, and the fraction of its direct descendants (packages that
 #'   depend on or import it) that currently fail. Note that only Bioc
 #'   dependencies are shown.
-#'
+#' @importFrom BiocPkgTools biocBuildreport biocPkgList buildPkgDependencyDataFrame buildPkgDependencyIgraph
+#' @importFrom dplyr group_by summarize filter pull left_join mutate '%>%'
+#' @importFrom igraph induced_subgraph V set_vertex_attr
+#' @importFrom visNetwork toVisNetworkData visEdges
+#' @examples
+#' explainBiocBuildFailure("Rhisat2")
 explainBiocBuildFailure <- function(package,
                                     biocVersion = BiocManager::version(),
                                     buildNodes = c("malbec2", "tokay2",
@@ -82,18 +87,16 @@ explainBiocBuildFailure <- function(package,
 
     pdg.pkg <- igraph::set_vertex_attr(
         pdg.pkg, name = "fails", index = v.pkg,
-        value = bpl2[match(names(v.pkg), bpl2$Package), ] %>%
-            dplyr::pull("fail"))
-    browser()
+        value = bpl2[match(names(v.pkg), bpl2$Package), "fail", drop = TRUE])
+    v.pkg <- igraph::V(pdg.pkg)
     pdg.pkg <- igraph::set_vertex_attr(
         pdg.pkg, name = "last_changed", index = v.pkg,
         value = as.character(
-            date(bpl2[match(names(v.pkg), bpl2$Package), ] %>%
-                                      dplyr::pull("last_changed"))))
+            bpl2[match(names(v.pkg), bpl2$Package), "last_changed", drop = TRUE]))
     pdg.pkg <- igraph::set_vertex_attr(
         pdg.pkg, name = "frac_downstream_fails", index = v.pkg,
-        value = bpl2[match(names(v.pkg), bpl2$Package), ] %>%
-            dplyr::pull("frac_downstream_fails"))
+        value = bpl2[match(names(v.pkg), bpl2$Package), "frac_downstream_fails", drop = TRUE])
+    v.pkg <- igraph::V(pdg.pkg)
 
     ## Subset to only nodes that fail
     if (showOnlyFailing) {
@@ -115,6 +118,6 @@ explainBiocBuildFailure <- function(package,
     data$nodes$label <- paste0(data$nodes$id, "\n",
                                data$nodes$last_changed, "\n",
                                signif(data$nodes$frac_downstream_fails, digits = 3))
-    visNetwork(nodes = data$nodes, edges = data$edges) %>%
-        visEdges(arrows = "from")
+    visNetwork::visNetwork(nodes = data$nodes, edges = data$edges) %>%
+        visNetwork::visEdges(arrows = "from")
 }
