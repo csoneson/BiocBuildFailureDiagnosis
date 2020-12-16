@@ -120,5 +120,6 @@ explainBiocBuildFailure <- function(package,
                                data$nodes$last_changed, "\n",
                                signif(data$nodes$frac_downstream_fails, digits = 3))
     visNetwork::visNetwork(nodes = data$nodes, edges = data$edges) %>%
-        visNetwork::visEdges(arrows = "from")
+        visNetwork::visEdges(arrows = "from") %>%
+        print()
 }
