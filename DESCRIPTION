@@ -1,7 +1,7 @@
 Package: BiocBuildFailureDiagnosis
 Title: Helps Discovering Possible Dependencies that Trigger
     an Error in your Package
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Charlotte",
              family = "Soneson",
@@ -13,7 +13,9 @@ Authors@R:
              role = "ctb",
              email = "lluis.revilla@gmail.com",
              comment = c(ORCID = "0000-0001-9747-2570")))
-Description: What the package does (one paragraph).
+Description: Convenience functions to assist in discovering possible 
+    Bioconductor packages triggering a failure on the Bioconductor build 
+    system. 
 License: MIT + file LICENSE
 URL: https://github.com/csoneson/BiocBuildFailureDiagnosis
 BugReports: 
@@ -29,7 +31,7 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

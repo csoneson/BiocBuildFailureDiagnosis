@@ -2,12 +2,14 @@
 % Please edit documentation in R/explainBiocBuildFailure.R
 \name{explainBiocBuildFailure}
 \alias{explainBiocBuildFailure}
-\title{Attempt to explain why a certain Bioconductor package fails on the build machine(s)}
+\title{Attempt to explain why a certain Bioconductor package fails on the
+Bioc build machine(s)}
 \usage{
 explainBiocBuildFailure(
   package,
   biocVersion = BiocManager::version(),
-  buildNodes = c("malbec2", "tokay2", "riesling1", "machv2"),
+  buildNodes = c("nebbiolo2", "tokay2", "machv2", "nebbiolo1", "riesling1",
+    "palomino3", "merida1"),
   showOnlyFailing = FALSE,
   repo = "BioCsoft",
   dependencies = c("Depends", "Imports")
@@ -19,7 +21,8 @@ explainBiocBuildFailure(
 \item{biocVersion}{Character string giving the Bioconductor version.}
 
 \item{buildNodes}{Character vector indicating the build nodes to check.
-Should be a subset of c("malbec2", "tokay2", "riesling1", "machv2").
+Should be a subset of c("nebbiolo2", "tokay2", "machv2", "nebbiolo1",
+"riesling1", "palomino3", "merida1").
 If more than one node is specified, a package is considered to fail
 if it fails on at least one of them. A failure is recognized by
 an "ERROR" returned in the build report, in any of the stages.}
@@ -35,17 +38,19 @@ passed to \code{biocPkgList()}.}
 to consider. Will be passed to \code{biocPkgList()}.}
 }
 \value{
-Plots a graph containing the package of interest as well as its dependencies.
-For each package, the graph displays the name, the date when it was
-last changed, and the fraction of its direct descendants (packages that
-depend on or import it) that currently fail. Note that only Bioc
-dependencies are shown.
+Plots a graph containing the package of interest as well as its
+dependencies. For each package, the graph displays the name, the date
+when it was last changed, and the fraction of its direct descendants
+(packages that depend on or import it) that currently fail. Note that only
+Bioc dependencies are shown.
 }
 \description{
-Attempt to explain why a certain Bioconductor package fails on the build machine(s)
+Attempt to explain why a certain Bioconductor package fails on the
+Bioc build machine(s)
 }
 \examples{
 explainBiocBuildFailure("Rhisat2")
+
 }
 \author{
 Charlotte Soneson
