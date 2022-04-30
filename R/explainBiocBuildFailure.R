@@ -31,6 +31,7 @@
 #' @importFrom igraph induced_subgraph V set_vertex_attr
 #' @importFrom visNetwork toVisNetworkData visEdges
 #' @importFrom BiocManager version
+#' @importFrom rlang .data
 #' 
 #' @export
 #' 
@@ -57,7 +58,7 @@ explainBiocBuildFailure <- function(package,
         dplyr::filter(node %in% buildNodes) %>%
         dplyr::group_by(pkg) %>%
         dplyr::summarize(fail = ("ERROR" %in% result),
-                         last_changed = max(git_last_commit_date),
+                         last_changed = max(.data$git_last_commit_date),
                          .groups = "drop")
 
     ## Get list of packages and build dependency graph
@@ -99,6 +100,9 @@ explainBiocBuildFailure <- function(package,
                 buildrep = br))
 
     pdg.pkg <- igraph::set_vertex_attr(
+        pdg.pkg, name = "version", index = v.pkg,
+        value = bpl2[match(names(v.pkg), bpl2$Package), "Version", drop = TRUE])
+    pdg.pkg <- igraph::set_vertex_attr(
         pdg.pkg, name = "fails", index = v.pkg,
         value = bpl2[match(names(v.pkg), bpl2$Package), "fail", drop = TRUE])
     v.pkg <- igraph::V(pdg.pkg)
@@ -134,4 +138,5 @@ explainBiocBuildFailure <- function(package,
     visNetwork::visNetwork(nodes = data$nodes, edges = data$edges) %>%
         visNetwork::visEdges(arrows = "from") %>%
         print()
+    invisible(data$nodes)
 }

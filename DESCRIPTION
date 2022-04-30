@@ -1,7 +1,7 @@
 Package: BiocBuildFailureDiagnosis
 Title: Helps Discovering Possible Dependencies that Trigger
     an Error in your Package
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Charlotte",
              family = "Soneson",
@@ -27,6 +27,7 @@ Imports:
     igraph (>= 1.2.6),
     lubridate (>= 1.7.9.2),
     purrr (>= 0.3.4),
+    rlang,
     visNetwork (>= 2.0.9)
 Encoding: UTF-8
 LazyData: true

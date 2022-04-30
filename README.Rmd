@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # Diagnose Bioconductor package build failures
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/csoneson/BiocBuildFailureDiagnosis/workflows/R-CMD-check/badge.svg)](https://github.com/csoneson/BiocBuildFailureDiagnosis/actions)
 <!-- badges: end -->
 
 
