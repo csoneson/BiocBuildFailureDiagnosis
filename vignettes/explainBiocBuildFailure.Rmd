@@ -1,0 +1,43 @@
+---
+title: "Investigate cause of failure on Bioc builders"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{explainBiocBuildFailure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(BiocBuildFailureDiagnosis)
+```
+
+```{r}
+dat <- explainBiocBuildFailure(package = "Rhisat2",
+                               biocVersion = BiocManager::version(),
+                               buildNodes = c("nebbiolo2", "tokay2", 
+                                              "machv2", "nebbiolo1",
+                                              "riesling1", "palomino3",
+                                              "merida1"),
+                               showOnlyFailing = FALSE,
+                               repo = "BioCsoft",
+                               dependencies = c("Depends", "Imports"))
+```
+
+```{r}
+dat
+```
+
+## Session info
+
+```{r}
+sessionInfo()
+```
+
